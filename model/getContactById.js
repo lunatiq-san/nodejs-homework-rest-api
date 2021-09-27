@@ -5,9 +5,6 @@ const getContactById = async (contactId) => {
   const index = contacts.findIndex(
     (contact) => contact.id === Number(contactId)
   );
-  // const contact = contacts.find(
-  //   (contact) => contact.id === Number(contactId)
-  // );
   if (index === -1) return null;
 
   return contacts[index];
