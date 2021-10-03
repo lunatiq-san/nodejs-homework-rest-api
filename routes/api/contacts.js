@@ -19,5 +19,6 @@ router.patch(
   validation(joiSchema),
   tryCatchWrapper(ctrl.updateById)
 );
+router.patch("/:contactId/favorite", tryCatchWrapper(ctrl.updateStatus));
 
 module.exports = router;

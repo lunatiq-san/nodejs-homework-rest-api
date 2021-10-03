@@ -5,7 +5,6 @@ const addContact = async (body) => {
     const { name, email, phone, favorite } = body;
     const newContact = new Contact({ name, email, phone, favorite });
     await newContact.save();
-    return newContact;
   } catch (error) {
     throw error;
   }

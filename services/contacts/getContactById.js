@@ -1,4 +1,3 @@
-const listContacts = require("./listContacts");
 const { Contact } = require("../../models");
 
 const getContactById = async (contactId) => {
