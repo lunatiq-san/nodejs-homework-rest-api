@@ -11,7 +11,7 @@ router.post(
   validation(joiSchema),
   tryCatchWrapper(ctrl.registration)
 );
-router.post("/login", tryCatchWrapper(ctrl.login));
+router.post("/login", validation(joiSchema), tryCatchWrapper(ctrl.login));
 router.get("/logout", tryCatchWrapper(ctrl.logout));
 
 module.exports = router;

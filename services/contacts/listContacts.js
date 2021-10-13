@@ -1,7 +1,7 @@
 const { Contact } = require("../../models");
 
-const listContacts = async () => {
-  return await Contact.find({});
+const listContacts = async (owner) => {
+  return await Contact.find({ owner });
 };
 
 module.exports = listContacts;

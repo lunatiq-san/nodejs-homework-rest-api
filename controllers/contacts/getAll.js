@@ -1,7 +1,9 @@
 const contactsOperations = require("../../services/contacts");
 
 const getAll = async (req, res, next) => {
-  const contacts = await contactsOperations.listContacts();
+  const { _id } = req.user;
+
+  const contacts = await contactsOperations.listContacts(_id);
   res.json({
     status: "success",
     code: 200,

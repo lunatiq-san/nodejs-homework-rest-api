@@ -10,7 +10,9 @@ const loginUser = async (email, password) => {
   if (!user) {
     throw new Unauthorized(`User with email: ${email} not found`);
   }
-  if (!(await bcrypt.compare(password, user.password))) {
+
+  const isCorrectPassword = await bcrypt.compare(password, user.password);
+  if (!isCorrectPassword) {
     throw new Unauthorized("Wrong password");
   }
 
@@ -21,11 +23,9 @@ const loginUser = async (email, password) => {
     process.env.JWT_SECRET
   );
 
-  const updateUser = await User.findOneAndUpdate(
-    { _id: user._id },
-    { new: true }
-  );
-  return { token, updateUser };
+  await User.findOneAndUpdate({ _id: user._id }, { new: true });
+  // return { token, updateUser };
+  return token;
 };
 
 module.exports = loginUser;
