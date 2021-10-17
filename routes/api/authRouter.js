@@ -16,6 +16,7 @@ router.post(
   tryCatchWrapper(ctrl.registration)
 );
 router.post("/login", validation(joiSchema), tryCatchWrapper(ctrl.login));
+router.post("/current", authMiddleware, tryCatchWrapper(ctrl.getCurrentUser));
 router.get("/logout", authMiddleware, tryCatchWrapper(ctrl.logout));
 
 module.exports = router;
