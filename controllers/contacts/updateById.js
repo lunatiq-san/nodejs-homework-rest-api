@@ -1,9 +1,14 @@
 const contactsOperations = require("../../services/contacts");
 
 const updateById = async (req, res, next) => {
-  const id = req.params.contactId;
+  const { id: contactId } = req.params;
+  const { _id } = req.user;
 
-  const result = await contactsOperations.updateContact(id, req.body);
+  const result = await contactsOperations.updateContact(
+    contactId,
+    req.body,
+    _id
+  );
   if (!result) throw new NotFound(`Contact with id=${id} not found`);
 
   res.status(201).json({

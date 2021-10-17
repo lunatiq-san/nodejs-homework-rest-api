@@ -34,7 +34,7 @@ const joiSchema = Joi.object({
   password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
 });
 
-const User = model("User", userSchema);
+const User = model("user", userSchema);
 
 module.exports = {
   User,

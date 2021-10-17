@@ -1,6 +1,10 @@
 const express = require("express");
 
-const { tryCatchWrapper, validation } = require("../../middlewares");
+const {
+  tryCatchWrapper,
+  validation,
+  authMiddleware,
+} = require("../../middlewares");
 const { joiSchema } = require("../../models/user");
 const ctrl = require("../../controllers/auth");
 
@@ -12,6 +16,6 @@ router.post(
   tryCatchWrapper(ctrl.registration)
 );
 router.post("/login", validation(joiSchema), tryCatchWrapper(ctrl.login));
-router.get("/logout", tryCatchWrapper(ctrl.logout));
+router.get("/logout", authMiddleware, tryCatchWrapper(ctrl.logout));
 
 module.exports = router;

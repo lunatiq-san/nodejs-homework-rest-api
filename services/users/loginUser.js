@@ -1,8 +1,8 @@
-const getUserByEmail = require("./getUserByEmail");
 const { Unauthorized } = require("http-errors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { User } = require("../../models");
+const getUserByEmail = require("./getUserByEmail");
 
 const loginUser = async (email, password) => {
   const user = await getUserByEmail(email);
@@ -23,7 +23,7 @@ const loginUser = async (email, password) => {
     process.env.JWT_SECRET
   );
 
-  await User.findOneAndUpdate({ _id: user._id }, { new: true });
+  await User.findByIdAndUpdate(user._id, { token }, { new: true });
   // return { token, updateUser };
   return token;
 };
