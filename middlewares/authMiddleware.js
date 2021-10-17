@@ -14,7 +14,7 @@ const authMiddleware = async (req, res, next) => {
     // decode
     const decodedToken = jwt.decode(token, process.env.JWT_SECRET);
     const user = await usersOperations.getUserById(decodedToken._id);
-    if (!user) {
+    if (!user || !user.token) {
       next(new Unauthorized("Not authorized"));
     }
     // req.token = token;
