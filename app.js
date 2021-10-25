@@ -4,6 +4,7 @@ const cors = require("cors");
 const app = express();
 
 const authRouter = require("./routes/api/authRouter");
+const usersRouter = require("./routes/api/usersRouter");
 const contactsRouter = require("./routes/api/contactsRouter");
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
@@ -11,8 +12,10 @@ const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
+app.use(express.static("public"));
 
 app.use("/api/auth", authRouter);
+app.use("/users", usersRouter);
 app.use("/api/contacts", contactsRouter);
 
 app.use((req, res) => {
