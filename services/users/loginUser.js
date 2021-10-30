@@ -11,6 +11,10 @@ const loginUser = async (email, password) => {
     throw new Unauthorized(`User with email: ${email} not found`);
   }
 
+  if (!user.verify) {
+    throw new Unauthorized("Email not verify");
+  }
+
   const isCorrectPassword = await bcrypt.compare(password, user.password);
   if (!isCorrectPassword) {
     throw new Unauthorized("Wrong password");

@@ -9,6 +9,7 @@ const ctrl = require("../../controllers/users");
 
 const router = express.Router();
 
+router.get("/verify/:verificationToken", tryCatchWrapper(ctrl.verify));
 router.patch(
   "/avatars",
   authMiddleware,
